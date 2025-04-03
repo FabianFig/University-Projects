@@ -11,6 +11,16 @@ public class VideoGames {
 	private String publisher;
 	private int copiesSold;
 	
+	public VideoGames(int id, String title, String platform, int releaseYr, String genre, String publisher, int copiesSold) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.platform = platform;
+		this.releaseYr = releaseYr;
+		this.genre = genre;
+		this.publisher = publisher;
+		this.copiesSold = copiesSold;
+	}
 	
 	public int getId() {
 		return id;

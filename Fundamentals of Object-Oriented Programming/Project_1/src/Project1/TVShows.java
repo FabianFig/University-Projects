@@ -12,6 +12,17 @@ public class TVShows {
 	private int numSeasons;
 	private String description;
 	
+	public TVShows(int id, String title, String director, String country, int releaseYr, String rating, int numSeasons, String description) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.director = director;
+		this.country = country;
+		this.releaseYr = releaseYr;
+		this.rating = rating;
+		this.numSeasons = numSeasons;
+		this.description = description;
+	}
 	
 	public int getId() {
 		return id;

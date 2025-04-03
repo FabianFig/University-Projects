@@ -1,4 +1,4 @@
-`package Project1;
+package Project1;
 
 public class MusicAlbums {
 	
@@ -11,6 +11,15 @@ public class MusicAlbums {
 	private double durationM;
 	private String genre;
 	
+	public MusicAlbums(int id, int releaseYr, String artist, int global_sales, int tracks, double durationM, String genre) {
+		this.id = id;
+		this.releaseYr = releaseYr;
+		this.artist = artist;
+		this.global_sales = global_sales;
+		this.tracks = tracks;
+		this.durationM = durationM;
+		this.genre = genre;
+	}
 	
 	public int getId() {
 		return id;

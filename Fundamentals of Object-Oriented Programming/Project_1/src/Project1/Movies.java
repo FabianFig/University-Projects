@@ -11,6 +11,17 @@ public class Movies {
 	private double durationM;
 	private String description;
 	
+	public Movies(int id, String title, String director, String country, int releaseYr, String rating, double durationM, String description) {
+		this.id = id;
+		this.title = title;
+		this.director = director;
+		this.country = country;
+		this.releaseYr = releaseYr;
+		this.setRating(rating);
+		this.durationM = durationM;
+		this.description = description;
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -41,6 +52,14 @@ public class Movies {
 	public void setReleaseYr(int releaseYr) {
 		this.releaseYr = releaseYr;
 	}
+	public String getRating() {
+		return rating;
+	}
+
+	public void setRating(String rating) {
+		this.rating = rating;
+	}
+
 	public double getDurationM() {
 		return durationM;
 	}
