@@ -12,6 +12,7 @@ public class MusicAlbums {
 	private String genre;
 	
 	public MusicAlbums(int id, int releaseYr, String artist, int global_sales, int tracks, double durationM, String genre) {
+		super();
 		this.id = id;
 		this.releaseYr = releaseYr;
 		this.artist = artist;

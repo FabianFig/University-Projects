@@ -12,6 +12,7 @@ public class Movies {
 	private String description;
 	
 	public Movies(int id, String title, String director, String country, int releaseYr, String rating, double durationM, String description) {
+		Super();
 		this.id = id;
 		this.title = title;
 		this.director = director;
