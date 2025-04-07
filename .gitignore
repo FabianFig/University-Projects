@@ -11,3 +11,25 @@ __pycache__/
 # Ignore OS-specific files
 .DS_Store
 Thumbs.db
+
+# Ignore class files
+/bin/
+/out/
+
+# Ignore IDE-specific files
+/.idea/
+/.settings/
+/.classpath
+/.project
+
+# Ignore logs and temporary files
+*.log
+*.tmp
+
+# Ignore dependency directories (for Maven, Node, etc.)
+target/
+node_modules/
+
+# Ignore environment or sensitive configuration files
+.env
+config.json
