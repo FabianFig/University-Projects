@@ -1,69 +1,75 @@
 package Project1;
 
-public class VideoGames {
-	
-	private int id;
-	//private String type;
-	private String title;
+public class VideoGame extends Product {
 	private String platform;
-	private int releaseYr;
 	private String genre;
 	private String publisher;
-	private int copiesSold;
-	
-	public VideoGames(int id, String title, String platform, int releaseYr, String genre, String publisher, int copiesSold) {
-		super();
-		this.id = id;
-		this.title = title;
+	private double copiesSold;
+//    private String description;
+
+	public VideoGame(int id, String title, String platform, int releaseYear, String genre, String publisher,
+			double copiesSold) {
+		super(id, title, releaseYear);
 		this.platform = platform;
-		this.releaseYr = releaseYr;
 		this.genre = genre;
 		this.publisher = publisher;
 		this.copiesSold = copiesSold;
+//        this.description = description;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public String getTitle() {
 		return title;
 	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
+
 	public String getPlatform() {
 		return platform;
 	}
+
 	public void setPlatform(String platform) {
 		this.platform = platform;
 	}
-	public int getReleaseYr() {
-		return releaseYr;
+
+	public int getReleaseYear() {
+		return releaseYear;
 	}
-	public void setReleaseYr(int releaseYr) {
-		this.releaseYr = releaseYr;
+
+	public void setReleaseYear(int releaseYear) {
+		this.releaseYear = releaseYear;
 	}
+
 	public String getGenre() {
 		return genre;
 	}
+
 	public void setGenre(String genre) {
 		this.genre = genre;
 	}
+
 	public String getPublisher() {
 		return publisher;
 	}
+
 	public void setPublisher(String publisher) {
 		this.publisher = publisher;
 	}
-	public int getCopiesSold() {
+
+	public double getCopiesSold() {
 		return copiesSold;
 	}
-	public void setCopiesSold(int copiesSold) {
+
+	public void setCopiesSold(double copiesSold) {
 		this.copiesSold = copiesSold;
 	}
-	
-	
 }
