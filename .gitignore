@@ -33,3 +33,6 @@ node_modules/
 # Ignore environment or sensitive configuration files
 .env
 config.json
+
+# Ignore in-class docs
+/in-class
