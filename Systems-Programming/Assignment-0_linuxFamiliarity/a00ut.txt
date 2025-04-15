@@ -1,0 +1,4 @@
+My name is Fabian Figueroa
+I am running this script from /home/sop310/courses/cs3423/assignments
+My username is sop310
+I am logged into fox01
