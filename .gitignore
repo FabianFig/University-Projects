@@ -36,3 +36,7 @@ config.json
 
 # Ignore in-class docs
 /in-class
+rsa
+rsa_imp_Student
+rsa_imp_Student.dSYM
+bin
