@@ -1,0 +1,98 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# --- Helper Functions ---
+def is_valid_transition_matrix(A):
+    A = np.array(A)
+    if (A < 0).any():  # allow zeros, reject negatives
+        return False
+    col_sums = np.sum(A, axis=0)
+    return np.allclose(col_sums, np.ones(A.shape[1]))
+
+def is_probability_vector(x):
+    x = np.array(x)
+    if (x < 0).any():
+        return False
+    return np.isclose(np.sum(x), 1)
+
+def build_google_matrix(A, p):
+    n = A.shape[0]
+    B = np.ones((n, n)) / n
+    M = (1 - p) * A + p * B
+    return M
+
+# --- Main Program ---
+def main():
+    # 1. User Input
+    A = np.zeros((3, 3))
+    print("Enter the elements of matrix A row by row (3x3 matrix):")
+    for i in range(3):
+        for j in range(3):
+            A[i, j] = float(input(f"Enter A[{i+1},{j+1}]: "))
+
+    x0 = np.zeros(3)
+    print("Enter the 3 elements of starting vector x0:")
+    for i in range(3):
+        x0[i] = float(input(f"Enter x0[{i+1}]: "))
+
+    # 2. Validate Matrix and Starting Vector
+    if not is_valid_transition_matrix(A):
+        print("Error: A is not a valid transition matrix.")
+        return
+
+    if not is_probability_vector(x0):
+        print("Error: x0 is not a valid probability vector.")
+        return
+
+    # 3. Iterative Computation
+    N = 100  # Number of iterations
+    history = [x0.copy()]
+    current_vector = x0.copy()
+
+    for _ in range(N):
+        next_vector = A @ current_vector
+        assert is_probability_vector(next_vector)
+        history.append(next_vector.copy())
+        current_vector = next_vector
+
+    x_infinity = current_vector
+
+    print("\nApproximate x_infinity:", x_infinity)
+    print("A x_infinity:", A @ x_infinity)
+
+    # 4. Plot convergence
+    norms = [np.linalg.norm(x_infinity - x) for x in history]
+    plt.plot(norms)
+    plt.xlabel('Iteration')
+    plt.ylabel('Norm ||x_infinity - x_n||')
+    plt.title('Convergence to x_infinity')
+    plt.grid(True)
+    plt.show()
+
+    # 5. Eigenvalues and Eigenvectors
+    eigenvalues, eigenvectors = np.linalg.eig(A)
+    print("\nEigenvalues:", eigenvalues)
+    print("Eigenvectors:\n", eigenvectors)
+
+    # 6. Optional: Using Google Matrix
+    use_google_matrix = input("\nDo you want to use the Google Matrix with teleportation? (yes/no): ").strip().lower()
+    if use_google_matrix == 'yes':
+        p = float(input("Enter the teleportation parameter p (0 <= p <= 1): "))
+        if not (0 <= p <= 1):
+            print("Error: p must be between 0 and 1.")
+            return
+        M = build_google_matrix(A, p)
+        current_vector = x0.copy()
+        history = [x0.copy()]
+        for _ in range(N):
+            next_vector = M @ current_vector
+            assert is_probability_vector(next_vector)
+            history.append(next_vector.copy())
+            current_vector = next_vector
+        x_infinity = current_vector
+        print("\nUsing Google Matrix:")
+        print("Approximate x_infinity:", x_infinity)
+        print("M x_infinity:", M @ x_infinity)
+
+if __name__ == "__main__":
+    main()
