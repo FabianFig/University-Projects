@@ -28,12 +28,24 @@ def main():
     print("Enter the elements of matrix A row by row (3x3 matrix):")
     for i in range(3):
         for j in range(3):
-            A[i, j] = float(input(f"Enter A[{i+1},{j+1}]: "))
+            while True:
+                try:
+                    user_input = input(f"Enter A[{i+1},{j+1}]: ")
+                    A[i, j] = float(eval(user_input))
+                    break
+                except:
+                    print("Invalid input. Enter a number or fraction like 1/2.")
 
     x0 = np.zeros(3)
     print("Enter the 3 elements of starting vector x0:")
     for i in range(3):
-        x0[i] = float(input(f"Enter x0[{i+1}]: "))
+        while True:
+            try:
+                user_input = input(f"Enter x0[{i+1}]: ")
+                x0[i] = float(eval(user_input))
+                break
+            except:
+                print("Invalid input. Enter a number or fraction like 1/2.")
 
     # 2. Validate Matrix and Starting Vector
     if not is_valid_transition_matrix(A):
