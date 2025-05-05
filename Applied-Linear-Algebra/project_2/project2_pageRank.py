@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+np.set_printoptions(precision=4, suppress=True)
 
 # --- Helper Functions ---
 def is_valid_transition_matrix(A):
@@ -57,7 +58,7 @@ def main():
         return
 
     # 3. Iterative Computation
-    N = 100  # Number of iterations
+    N = 1000  # Number of iterations
     history = [x0.copy()]
     current_vector = x0.copy()
 
@@ -83,10 +84,10 @@ def main():
 
     # 5. Eigenvalues and Eigenvectors
     eigenvalues, eigenvectors = np.linalg.eig(A)
-    print("\nEigenvalues:", eigenvalues)
-    print("Eigenvectors:\n", eigenvectors)
+    print("\nEigenvalues:", np.round(eigenvalues, 4))
+    print("\nEigenvectors:\n", np.round(eigenvectors, 4))
 
-    # 6. Optional: Using Google Matrix
+    # Using Google Matrix
     use_google_matrix = input("\nDo you want to use the Google Matrix with teleportation? (yes/no): ").strip().lower()
     if use_google_matrix == 'yes':
         p = float(input("Enter the teleportation parameter p (0 <= p <= 1): "))
