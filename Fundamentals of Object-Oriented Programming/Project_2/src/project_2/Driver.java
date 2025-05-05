@@ -1,33 +1,39 @@
 package project_2;
 
 import java.io.IOException;
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.io.File;
+import java.util.*;
 
 public class Driver {
 
     public static void main(String[] args) {
+    	
+        File file = new File("patient.csv");
+
+        //System.out.println("File being search for is: " + file.getAbsolutePath());
+        //System.out.println("does it exist? " + file.exists());
+    	
         try {
             Login login = new Login("patient.csv", "medicalstaff.csv");
-            User loggedInUser = login.authenticate();
-
-            List<Patient> patients = login.loadPatients("patients.csv");
-            PatientManager manager = new PatientManager(loggedInUser, patients);
+            User user = login.authenticate();
+            
+            PatientManager manager = new PatientManager(user, "patient.csv");
+            int choice = 0;
 
             Scanner scnr = new Scanner(System.in);
             while (true) {
                 System.out.println("1. View Profile");
                 System.out.println("2. View Patient");
-                System.out.println("3. Edirt Current Patient");
+                System.out.println("3. Edit Current Patient");
                 System.out.println("4. Exit");
                 System.out.println("5. Generate Report");
                 System.out.print("Enter your choice: ");
                 try {
-                    int choice = scnr.nextInt();
+                    choice = scnr.nextInt();
                     scnr.nextLine();
                 } catch (InputMismatchException e) {
                     System.out.println("Invalid input. Please enter a number.");
-                    scnr.nextLine(); // Clear the invalid input
+                    scnr.nextLine(); 
                     continue;
                 }
 
@@ -36,16 +42,16 @@ public class Driver {
                         manager.viewProfile();
                         break;
                     case 2:
-                        if (loggedInUser instanceof MedicalStaff) {
+                        if (user instanceof MedicalStaff) {
                             System.out.println("Enter Patient ID: ");
                             String id = scnr.nextLine();
                             manager.viewPatient(id);
                         } else {
-                            System.out.println("Access denied. Only medical staff can view patient details.");
+                            System.out.println("Access denied. Only medical staff can view patient details.\n");
                         }
                         break;
                     case 3:
-                        if (loggedInUser instanceof MedicalStaff) {
+                        if (user instanceof MedicalStaff) {
                             System.out.print("Enter what you'd like to edit (name/email/treatment_notes): ");
                             String editChoice = scnr.nextLine().toLowerCase();
                             if (!editChoice.equals("name") && !editChoice.equals("email") && !editChoice.equals("treatment_notes")) {
@@ -55,13 +61,13 @@ public class Driver {
                             System.out.print("Enter new value: ");
                             String newValue = scnr.nextLine();
                             manager.editCurrentPatient(editChoice, newValue);
-                            manager.savePatientsToFile("patients.csv");
+                            manager.savePatientsToFile("patient.csv");
                         } else {
-                            System.out.println("Access denied.");
+                            System.out.println("Access denied. Only medical staff can edit patient details\n");
                         }
                         break;
                     case 4:
-                        System.out.println("Exiting...");
+                        System.out.println("Exiting...\n");
                         return;
                     case 5:
                         System.out.print("Enter report type (id/name/email): ");

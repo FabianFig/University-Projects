@@ -4,7 +4,7 @@ public class MedicalStaff extends User {
 
     private String department;
 
-    public MedicalStaff(String id, String username, String password, String name, String email, String department) {
+    public MedicalStaff(int id, String username, String password, String name, String email, String department) {
         super(id, username, password, name, email);
         this.department = department;
     }

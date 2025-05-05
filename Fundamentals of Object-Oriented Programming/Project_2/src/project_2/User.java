@@ -2,13 +2,13 @@ package project_2;
 
 public abstract class User {
 
-    protected String id;
+    protected int id;
     protected String username;
     protected String password;
     protected String name;
     protected String email;
 
-    public User(String id, String username, String password, String name, String email) {
+    public User(int id, String username, String password, String name, String email) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -16,6 +16,22 @@ public abstract class User {
         this.email = email;
     }
 
+    public int getId() {
+		return id;
+	}
+    
+    public void setId(int id) {
+		this.id = id;
+	}
+    
+    public String getUsername() {
+		return username;
+	}
+    
+    public void setUsername(String username) {
+		this.username = username;
+	}
+    
     public String getPassword() {
         return password;
     }

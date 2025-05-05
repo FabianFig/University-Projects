@@ -6,12 +6,12 @@ import java.util.ArrayList;
 public class PatientManager {
 
     private User currUser;
-    private ArrayList<Patient> Patients;
+    private ArrayList<Patient> patients;
     private Patient currViewPatient;
 
     public PatientManager(User currUser, String patientCSV) throws IOException {
         this.currUser = currUser;
-        this.Patients = new ArrayList<>();
+        this.patients = new ArrayList<>();
         this.currViewPatient = null;
         loadData(patientCSV);
         sortPatientsByID();
@@ -22,7 +22,7 @@ public class PatientManager {
     }
 
     public ArrayList<Patient> getPatients() {
-        return Patients;
+        return patients;
     }
 
     private void loadData(String patientCSV) throws IOException {
@@ -30,19 +30,21 @@ public class PatientManager {
         String line;
         while ((line = reader.readLine()) != null) {
             String[] data = line.split(",");
-            Patients.add(new Patient(data[0], data[1], data[2], data[3], data[4], data[5]));
+            int id = Integer.parseInt(data[0]);
+            patients.add(new Patient(id, data[1], data[2], data[3], data[4], data[5]));
         }
         reader.close();
     }
 
     private Patient binarySearchById(String id) {
-        int low = 0, high = Patients.size() - 1;
+    	int targetId = Integer.parseInt(id);
+        int low = 0, high = patients.size() - 1;
         while (low <= high) {
             int mid = (low + high) / 2;
-            Patient midPatient = Patients.get(mid);
-            if (midPatient.id.equals(id)) {
+            Patient midPatient = patients.get(mid);
+            if (midPatient.getId() == targetId) {
                 return midPatient;
-            } else if (midPatient.id.compareTo(id) < 0) {
+            } else if (midPatient.getId() < targetId) {
                 low = mid + 1;
             } else {
                 high = mid - 1;
@@ -52,12 +54,12 @@ public class PatientManager {
     }
 
     public void sortPatientsByID() {
-        for (int i = 0; i < Patients.size() - 1; i++) {
-            for (int j = 0; j < Patients.size() - i - 1; j++) {
-                if (Patients.get(j).id.compareTo(Patients.get(j + 1).id) > 0) {
-                    Patient temp = Patients.get(j);
-                    Patients.set(j, Patients.get(j + 1));
-                    Patients.set(j + 1, temp);
+        for (int i = 0; i < patients.size() - 1; i++) {
+            for (int j = 0; j < patients.size() - i - 1; j++) {
+            	if (patients.get(j).getId() > patients.get(j + 1).getId()) {
+                    Patient temp = patients.get(j);
+                    patients.set(j, patients.get(j + 1));
+                    patients.set(j + 1, temp);
                 }
             }
         }
@@ -65,12 +67,51 @@ public class PatientManager {
 
     public void savePatientsToFile(String filePath) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
-        for (Patient patient : Patients) {
+        for (Patient patient : patients) {
             writer.write(patient.id + "," + patient.username + "," + patient.password + ","
                     + patient.name + "," + patient.email + "," + patient.getTreatmentNotes());
             writer.newLine();
         }
         writer.close();
     }
+
+    public void viewProfile() {
+        System.out.println(currUser.toString());
+    }
+
+    public void viewPatient(String id) {
+        Patient result = binarySearchById(id);
+        if (result != null) {
+            currViewPatient = result;
+            System.out.println(result);
+        } else {
+            System.out.println("Patient not found.");
+        }
+    }
+
+    public void editCurrentPatient(String field, String newValue) {
+        if (currViewPatient == null) {
+            System.out.println("No patient selected.");
+            return;
+        }
+
+        switch (field) {
+            case "name":
+                currViewPatient.setName(newValue);
+                break;
+            case "email":
+                currViewPatient.setEmail(newValue);
+                break;
+            case "treatment_notes":
+                currViewPatient.setTreatmentNotes(newValue);
+                break;
+            case "password":
+                currViewPatient.setPassword(newValue);
+                break;
+            default:
+                System.out.println("Invalid field.");
+        }
+    }
+
 
 }

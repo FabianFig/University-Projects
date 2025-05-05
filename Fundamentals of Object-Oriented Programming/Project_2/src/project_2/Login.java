@@ -28,7 +28,7 @@ public class Login {
                 }
             }
 
-            // Check Medical Staff
+            
             for (MedicalStaff staff : medicalStaff) {
                 if (staff.getUsername().equals(username) && staff.getPassword().equals(password)) {
                     System.out.println("Login successful as Medical Staff.");
@@ -41,28 +41,29 @@ public class Login {
     }
 
     private List<Patient> loadPatients(String filePath) throws IOException {
-        // Read patient file and create Patient objects
         List<Patient> patients = new ArrayList<>();
         BufferedReader reader = new BufferedReader(new FileReader(filePath));
         String line;
         while ((line = reader.readLine()) != null) {
             String[] data = line.split(",");
-            patients.add(new Patient(data[0], data[1], data[2], data[3], data[4], data[5]));
+            int id = Integer.parseInt(data[0]);
+            patients.add(new Patient(id, data[1], data[2], data[3], data[4], data[5]));
         }
         reader.close();
         return patients;
     }
 
     private List<MedicalStaff> loadMedicalStaff(String filePath) throws IOException {
-        // Read staff file and create MedicalStaff objects
         List<MedicalStaff> staff = new ArrayList<>();
         BufferedReader reader = new BufferedReader(new FileReader(filePath));
         String line;
         while ((line = reader.readLine()) != null) {
             String[] data = line.split(",");
-            staff.add(new MedicalStaff(data[0], data[1], data[2], data[3], data[4], data[5]));
+            int id = Integer.parseInt(data[0]);
+            staff.add(new MedicalStaff(id, data[1], data[2], data[3], data[4], data[5]));
         }
         reader.close();
         return staff;
     }
+    
 }
