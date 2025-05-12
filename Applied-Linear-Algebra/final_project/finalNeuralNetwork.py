@@ -2,6 +2,7 @@ import numpy as np
 from sklearn.datasets import load_iris
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.model_selection import train_test_split
+
 # Load the Iris dataset
 data = load_iris()
 X = data.data # shape: (150, 4)
@@ -25,18 +26,22 @@ hidden_dim = 6 # size of hidden layer
 output_dim = 3 # number of classes
 
 # Initialize weights and biases
-W1 = np.random.randn(2, 2)
-b1 = np.random.randn(1, 2)
-W2 = np.random.randn(2, 1)
-b2 = np.random.randn(1, 1)
+W1 = np.random.randn(4, 6)
+b1 = np.random.randn(1, 6)
+W2 = np.random.randn(6, 3)
+b2 = np.random.randn(1, 3)
 
 # Activation functions
 def relu(a):
-    
+    return np.maximum(0, a)
+
 def relu_derivative(a):
-    
+    return (a > 0).astype(float)
+
 def softmax(a):
-    
+    exp_a = np.exp(a - np.max(a, axis=1, keepdims=True))
+    return exp_a / np.sum(exp_a, axis=1, keepdims=True)
+
 # Loss function: cross-entropy
 def cross_entropy(y_pred, y_true):
     eps = 1e-10
@@ -44,13 +49,15 @@ def cross_entropy(y_pred, y_true):
 
 # Gradient of loss w.r.t. logits (output preactivation)
 def dL_da2(y_pred, y_true):
+    return y_pred - y_true
+
 # Training loop
 for epoch in range(10000):
     # Forward pass
-        # preactivation hidden layer
-            # activation hidden layer
-          # preactivation output layer
-        # activation output layer (softmax)
+    z1 = X_train @ W1 + b1  # preactivation hidden layer
+    a1 = relu(z1)           # activation hidden layer
+    z2 = a1 @ W2 + b2       # preactivation output layer
+    y_pred = softmax(z2)    # activation output layer (softmax)
 
 # Compute loss
 loss = cross_entropy(y_pred, y_train)
@@ -67,11 +74,15 @@ dW1 = X_train.T @ da1
 db1 = np.sum(da1, axis=0, keepdims=True)
 
 # Update parameters
-lr = #Learning Rate
-    #Update W1
-    #Update b1
-    #Update W2
-    #update b2
+lr = 0.1 #Learning Rate
+#Update W1
+W2 -= lr * dW2
+#Update b1
+b2 -= lr * db2
+#Update W2
+W1 -= lr * dW1
+#update b2
+b1 -= lr * db1
 
 # Print loss every 10 epochs
 if epoch % 100 == 0:
