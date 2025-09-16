@@ -1,5 +1,7 @@
 /**
- * The AidShip class represents an AidShip
+ * Represents an aid ship capable of providing emergency support.
+ * Extends the Ship class and implements EmergencySupport interface.
+ *
  * @author Fabian Figueroa
  */
 
@@ -9,14 +11,16 @@ public class AidShip extends Ship implements EmergencySupport{
     private boolean hasHelipad;
 
     /**
-     * @param name the name of the ship
+     * Constructs an AidShip with specified attributes.
+     *
+     * @param name               the name of the ship
      * @param registrationNumber the registration number of the ship
-     * @param tonnage the weight of the ship
-     * @param crewSize the number of crew members aboard the ship
-     * @param currentPort the current location of the aid ship
-     * @param aidType the type of aid the ship is carrying
-     * @param suppliesOnBoard the amount of supplies the ship has on board
-     * @param hasHelipad whether the ship has a helipad or not
+     * @param tonnage            the weight of the ship
+     * @param crewSize           the number of crew members aboard
+     * @param currentPort        the current location of the ship
+     * @param aidType            the type of aid the ship is carrying
+     * @param suppliesOnBoard    the amount of supplies on board
+     * @param hasHelipad         true if the ship has a helipad, false otherwise
      */
 
     public AidShip(String name, String registrationNumber, double tonnage, int crewSize,
@@ -28,55 +32,55 @@ public class AidShip extends Ship implements EmergencySupport{
     }
 
     /**
-     * returns the type of aid aboard the shp
-     * @return String, the type of aid aboard
+     * Returns the type of aid aboard the ship.
+     * @return the aid type
      */
     public String getAidType() {
         return aidType;
     }
 
     /**
-     * sets the type of aid
-     * @param aidType, the type of aid (String)
+     * Sets the type of aid aboard the ship.
+     * @param aidType the aid type
      */
     public void setAidType(String aidType) {
         this.aidType = aidType;
     }
 
     /**
-     * returns the number of supplies on board
-     * @return int, the number of supplies
+     * Returns the number of supplies on board.
+     * @return the number of supplies
      */
     public int getSuppliesOnBoard() {
         return suppliesOnBoard;
     }
 
     /**
-     * sets the amount of supplies on board
-     * @param suppliesOnBoard, the number of supplies on board (int)
+     * Sets the number of supplies on board.
+     * @param suppliesOnBoard the number of supplies
      */
     public void setSuppliesOnBoard(int suppliesOnBoard) {
         this.suppliesOnBoard = suppliesOnBoard;
     }
 
     /**
-     * returns true or false depending on whether the ship has a helipad
-     * @return boolean, status of a helipad on board
+     * Indicates whether the ship has a helipad.
+     * @return true if the ship has a helipad, false otherwise
      */
-    public boolean HasHelipad() {
+    public boolean hasHelipad() {
         return hasHelipad;
     }
 
     /**
-     * sets the status of a helipad
-     * @param hasHelipad, status of a helippad on board (boolean)
+     * Sets the helipad availability status.
+     * @param hasHelipad true if the ship has a helipad, false otherwise
      */
     public void setHasHelipad(boolean hasHelipad) {
         this.hasHelipad = hasHelipad;
     }
 
     /**
-     * prints string indicating the name of the ship and the number of aid it is deploying
+     * Deploys aid and prints a message indicating the ship's name and amount of aid deployed.
      */
     @Override
     public void deployAid() {
@@ -84,8 +88,8 @@ public class AidShip extends Ship implements EmergencySupport{
     }
 
     /**
-     * returns a string detailing the attributes of the ship
-     * @return String, details of ship
+     * Returns a string representation of the ship's attributes.
+     * @return a detailed description of the aid ship
      */
     @Override
     public String toString() {
@@ -101,8 +105,8 @@ public class AidShip extends Ship implements EmergencySupport{
     }
 
     /**
-     * returns a string dictating the necessary attribute details for emergency readiness
-     * @return String, returns details related directly to aid/emergency assistance
+     * Returns a report detailing the ship's emergency readiness.
+     * @return a formatted emergency readiness report
      */
     @Override
     public String getEmergencyReadinessReport() {
@@ -115,8 +119,8 @@ public class AidShip extends Ship implements EmergencySupport{
     }
 
     /**
-     * sets the current speed of the aid ship
-     * @param speed, sets speed of the ship (double)
+     * Sets the current speed of the ship.
+     * @param speed the new speed
      */
     @Override
     public void setCurrentSpeed(double speed) {

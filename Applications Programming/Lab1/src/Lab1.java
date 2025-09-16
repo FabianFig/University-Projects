@@ -1,5 +1,23 @@
+/**
+ * Entry point for Lab 1: Emergency Response Simulation.
+ *
+ * Demonstrates the creation and coordination of various emergency units,
+ * including an AidShip, RescueHelicopter, MobileClinicTruck, and PassengerShip.
+ *
+ * Units are registered with a DisasterResponseCoordinator, which handles
+ * deployment and readiness reporting.
+ *
+ * Also showcases PassengerShip functionality such as navigation, entertainment,
+ * docking, and manifest reporting.
+ *
+ * @author Fabian Figueroa
+ */
 public class Lab1 {
 
+    /**
+     * Main method to run the emergency response simulation.
+     * @param args command-line arguments (not used)
+     */
     public static void main(String[] args) {
 
         // Create units
